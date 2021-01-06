@@ -1,0 +1,54 @@
+title: |-
+  Bitrise Job Balancer
+summary: |
+  Manage the amount of concurrencies the app is allowed to consume.
+description: |
+  Manage the amount of concurrencies the app is allowed to consume.
+website: https://github.com/r10-ecma/bitrise-step-job-balancer
+source_code_url: https://github.com/r10-ecma/bitrise-step-job-balancer
+support_url: https://github.com/r10-ecma/bitrise-step-job-balancer
+host_os_tags:
+  - osx-10.10
+  - ubuntu-16.04
+project_type_tags:
+   - ios
+   - macos
+   - android
+type_tags:
+  - utility
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+deps:
+  brew:
+  - name: git
+  - name: wget
+  apt_get:
+  - name: git
+  - name: wget
+toolkit:
+  bash:
+    entry_file: step.sh
+inputs:
+  - app_cc_count: 
+    opts:
+      title: "Allotted Concurrency Count"
+      description: |
+        The amount of concurrency the app is allowed to consume. 
+      is_expand: true
+      is_required: true
+  - wait_time:
+    opts:
+      title: "Wait Time"
+      description: |
+        The amount of time to wait in seconds before attempting to run the job in case the app is already consuming the allotted concurrencies.
+      is_expand: true
+      is_required: true
+  - bitrise_access_token:
+    opts:
+      title: "Bitrise Access Token"
+      description: |
+        The access token to use for calling the Bitrise API.
+      is_expand: true
+      is_required: true

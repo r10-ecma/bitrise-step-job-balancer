@@ -1,0 +1,27 @@
+format_version: 4
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+
+app:
+  envs:
+  # An example secret param, define it (A_SECRET_PARAM) in .bitrise.secrets.yml
+  - bitrise_access_token: $bitrise_access_token
+  
+workflows:
+  test:
+    steps:
+    - change-workdir:
+        title: Switch working dir to test / _tmp dir
+        description: |-
+          To prevent step testing issues, like referencing relative
+          files with just './some-file' in the step's code, which would
+          work for testing the step from this directory directly
+          but would break if the step is included in another `bitrise.yml`.
+        run_if: true
+        inputs:
+        - path: ./_tmp
+        - is_create_path: true
+    - path::./:
+        inputs:
+        - app_cc_count: ""
+        - wait_time: ""
+        - bitrise_access_token: ""
